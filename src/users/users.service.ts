@@ -1,4 +1,3 @@
-import { UserEnity } from './entities/user.entity';
 import { NotFoundError } from './../common/errors/types/NotFoundError';
 import { UsersRepository } from './repositories/user.repository';
 import { Injectable } from '@nestjs/common';
@@ -17,7 +16,7 @@ export class UsersService {
     return this.usersRepository.findAll();
   }
 
-  async findOne(id: number): Promise<UserEnity> {
+  async findOne(id: number) {
     const user = await this.usersRepository.findOne(id);
 
     if (!user) {
