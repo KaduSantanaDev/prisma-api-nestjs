@@ -3,18 +3,18 @@ import {
   NestInterceptor,
   ExecutionContext,
   CallHandler,
-  UnauthorizedException,
+  ConflictException,
 } from '@nestjs/common';
 import { catchError, Observable } from 'rxjs';
-import { UnauthorizedError } from '../types/UnauthorizedError';
+import { ConflictError } from '../types/ConflictErrort';
 
 @Injectable()
-export class UnauthorizedInterceptor implements NestInterceptor {
+export class ConflictInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     return next.handle().pipe(
       catchError(error => {
-        if (error instanceof UnauthorizedError) {
-          throw new UnauthorizedException(error.message);
+        if (error instanceof ConflictError) {
+          throw new ConflictException(error.message);
         } else {
           throw error;
         }
